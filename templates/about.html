@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="about-section">
+    <h2 class="section-title">About CardioScan AI</h2>
+    
+    <div class="about-content">
+        <div class="about-text">
+            <p>CardioScan AI is an advanced heart disease prediction system that leverages deep learning technology to assess cardiovascular health risks based on multiple health parameters.</p>
+            
+            <h3>Our Technology</h3>
+            <p>Our system uses a sophisticated neural network trained on thousands of patient records to identify patterns and risk factors associated with heart disease. The model analyzes 20 different health parameters to generate accurate risk assessments.</p>
+            
+            <h3>Parameters Analyzed</h3>
+            <ul>
+                <li>Demographic information (age, sex)</li>
+                <li>Lifestyle factors (smoking, activity levels)</li>
+                <li>Medical history (diabetes, hypertension, family history)</li>
+                <li>Vital signs (blood pressure, heart rate)</li>
+                <li>Lab results (cholesterol levels)</li>
+                <li>ECG patterns and cardiac indicators</li>
+            </ul>
+            
+            <h3>Disclaimer</h3>
+            <p>This tool is designed for informational purposes only and should not be used as a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of qualified healthcare providers with any questions you may have regarding medical conditions.</p>
+        </div>
+        
+        <div class="about-visual">
+            <div class="network-visualization">
+                <div class="network-node main-node">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="network-layer">
+                    <div class="network-node"><i class="fas fa-user"></i></div>
+                    <div class="network-node"><i class="fas fa-tint"></i></div>
+                    <div class="network-node"><i class="fas fa-heartbeat"></i></div>
+                    <div class="network-node"><i class="fas fa-stethoscope"></i></div>
+                </div>
+                <div class="network-layer">
+                    <div class="network-node"><i class="fas fa-brain"></i></div>
+                    <div class="network-node"><i class="fas fa-cogs"></i></div>
+                    <div class="network-node"><i class="fas fa-chart-line"></i></div>
+                </div>
+                <div class="network-layer">
+                    <div class="network-node result-node">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const nodes = document.querySelectorAll('.network-node');
+        
+        // Animate nodes sequentially
+        nodes.forEach((node, index) => {
+            setTimeout(() => {
+                node.classList.add('active');
+            }, index * 200);
+        });
+        
+        // Continuous animation
+        setInterval(() => {
+            nodes.forEach(node => node.classList.remove('active'));
+            
+            setTimeout(() => {
+                nodes.forEach((node, index) => {
+                    setTimeout(() => {
+                        node.classList.add('active');
+                    }, index * 200);
+                });
+            }, 500);
+        }, 5000);
+    });
+</script>
+{% endblock %}

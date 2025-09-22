@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="predict-section">
+    <h2 class="section-title">Heart Disease Risk Assessment</h2>
+    <p class="section-subtitle">Enter your health information below to assess your heart disease risk</p>
+
+    {% if error %}
+    <div class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <div class="predict-container">
+        <div class="form-container">
+            <form action="{{ url_for('predict') }}" method="post" class="prediction-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="20" max="90" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sex">Sex</label>
+                        <select id="sex" name="sex" required>
+                            <option value="">Select</option>
+                            <option value="0">Male</option>
+                            <option value="1">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="smoker">Smoker</label>
+                        <select id="smoker" name="smoker" required>
+                            <option value="">Select</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="years_of_smoking">Years of Smoking (0 for non-smokers)</label>
+                        <input type="number" id="years_of_smoking" name="years_of_smoking" min="0" max="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="LDL_cholesterol">LDL Cholesterol</label>
+                        <input type="number" id="LDL_cholesterol" name="LDL_cholesterol" min="26" max="260" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="chest_pain_type">Chest Pain Type</label>
+                        <select id="chest_pain_type" name="chest_pain_type" required>
+                            <option value="">Select</option>
+                            <option value="1">Typical Angina</option>
+                            <option value="2">Atypical Angina</option>
+                            <option value="3">Non-anginal Pain</option>
+                            <option value="4">Asymptomatic</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Height (cm)</label>
+                        <input type="number" id="height" name="height" min="128" max="192" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" id="weight" name="weight" min="41" max="134" step="0.1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="familyhist">Family History of Heart Disease</label>
+                        <select id="familyhist" name="familyhist" required>
+                            <option value="">Select</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="activity">Active Lifestyle</label>
+                        <select id="activity" name="activity" required>
+                            <option value="">Select</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="lifestyle">Living Area</label>
+                        <select id="lifestyle" name="lifestyle" required>
+                            <option value="">Select</option>
+                            <option value="1">City</option>
+                            <option value="2">Town</option>
+                            <option value="3">Village</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardiac_intervention">Previous Cardiac Intervention</label>
+                        <select id="cardiac_intervention" name="cardiac_intervention" required>
+                            <option value="">Select</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="heart_rate">Heart Rate</label>
+                        <input type="number" id="heart_rate" name="heart_rate" min="40" max="140" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="diabets">Diabetes</label>
+                        <select id="diabets" name="diabets" required>
+                            <option value="">Select</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="blood_pressure_sys">Systolic Blood Pressure</label>
+                        <input type="number" id="blood_pressure_sys" name="blood_pressure_sys" min="80" max="220" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="blood_pressure_dias">Diastolic Blood Pressure</label>
+                        <input type="number" id="blood_pressure_dias" name="blood_pressure_dias" min="40" max="140" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="hypertention">Hypertension</label>
+                        <select id="hypertention" name="hypertention" required>
+                            <option value="">Select</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Interventricular_septal_end_diastole">LVH Presenting</label>
+                        <select id="Interventricular_septal_end_diastole" name="Interventricular_septal_end_diastole" required>
+                            <option value="">Select</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ecg_pattern">ECG Pattern</label>
+                        <select id="ecg_pattern" name="ecg_pattern" required>
+                            <option value="">Select</option>
+                            <option value="1">ST-Elevation</option>
+                            <option value="2">ST-Depression</option>
+                            <option value="3">T-Inversion</option>
+                            <option value="4">Normal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Q_wave">Q-wave Presenting</label>
+                        <select id="Q_wave" name="Q_wave" required>
+                            <option value="">Select</option>
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn predict-btn">Analyze My Risk</button>
+            </form>
+        </div>
+        <div class="visualization-container">
+            <div class="heart-glow"></div>
+            <div class="heart">
+                <div class="heart-veins">
+                    <div class="vein vein-1"></div>
+                    <div class="vein vein-2"></div>
+                    <div class="vein vein-3"></div>
+                </div>
+            </div>
+            <p class="visualization-text">Real-time heart visualization based on your inputs</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        // Use the shared setHeartRate function from script.js to control heartbeat/pulse by BPM
+        document.addEventListener('DOMContentLoaded', function() {
+            // initialize interactive elements from script.js
+            if (typeof initInteractiveElements === 'function') {
+                try { initInteractiveElements(); } catch(e){}
+            }
+
+            const heartRateInput = document.getElementById('heart_rate');
+            const defaultBpm = 72;
+
+            function applyRateFromInput() {
+                const bpm = parseInt(heartRateInput.value) || defaultBpm;
+                const clamped = Math.max(40, Math.min(140, bpm));
+                // setHeartRate expects beats per minute
+                if (typeof setHeartRate === 'function') {
+                    setHeartRate(clamped);
+                } else {
+                    // fallback: set CSS var directly
+                    const duration = 60 / clamped;
+                    const heart = document.querySelector('.heart');
+                    const glow = document.querySelector('.heart-glow');
+                    if (heart) heart.style.setProperty('--hr-duration', `${duration}s`);
+                    if (glow) glow.style.setProperty('--hr-duration', `${duration}s`);
+                }
+            }
+
+            if (heartRateInput) {
+                // apply initial rate
+                applyRateFromInput();
+                heartRateInput.addEventListener('input', applyRateFromInput);
+            }
+        });
+    </script>
+{% endblock %}

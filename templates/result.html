@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="result-section">
+    <div class="result-container">
+        <h2 class="section-title">Prediction Results</h2>
+        
+        <div class="result-content">
+            <div class="result-visualization">
+                <div class="result-heart-container">
+                    <div class="heart-glow {% if result == 'Heart Disease' %}high-risk{% else %}low-risk{% endif %}"></div>
+                    <div class="heart {% if result == 'Heart Disease' %}high-risk{% else %}low-risk{% endif %}">
+                        <div class="heart-veins">
+                            <div class="vein vein-1"></div>
+                            <div class="vein vein-2"></div>
+                            <div class="vein vein-3"></div>
+                        </div>
+                    </div>
+                    <div class="risk-label {% if result == 'Heart Disease' %}high-risk{% else %}low-risk{% endif %}">
+                        {% if result == 'Heart Disease' %}
+                            High Risk
+                        {% else %}
+                            Low Risk
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="result-details">
+                <div class="risk-level {% if result == 'Heart Disease' %}high-risk{% else %}low-risk{% endif %}">
+                    <h3>Risk Level: 
+                        {% if result == 'Heart Disease' %}
+                            <span class="high-risk-text">High</span>
+                        {% else %}
+                            <span class="low-risk-text">Low</span>
+                        {% endif %}
+                    </h3>
+                    <div class="risk-bar">
+                        <div class="risk-progress {% if result == 'Heart Disease' %}high-risk{% else %}low-risk{% endif %}" 
+                             style="width: {{ probability }}%;"></div>
+                    </div>
+                    <p class="probability-text">Probability: {{ probability }}%</p>
+                </div>
+                
+                <div class="recommendations">
+                    <h3>Recommendations</h3>
+                    {% if result == 'Heart Disease' %}
+                    <ul>
+                        <li>Consult with a cardiologist as soon as possible</li>
+                        <li>Adopt a heart-healthy diet low in saturated fats</li>
+                        <li>Engage in regular moderate exercise</li>
+                        <li>Monitor your blood pressure regularly</li>
+                        <li>Reduce stress through meditation or yoga</li>
+                        <li>Avoid smoking and limit alcohol consumption</li>
+                    </ul>
+                    {% else %}
+                    <ul>
+                        <li>Maintain your current healthy lifestyle</li>
+                        <li>Continue regular physical activity</li>
+                        <li>Schedule annual check-ups with your doctor</li>
+                        <li>Eat a balanced diet rich in fruits and vegetables</li>
+                        <li>Monitor your heart health indicators regularly</li>
+                    </ul>
+                    {% endif %}
+                </div>
+                
+                <div class="actions">
+                    <a href="{{ url_for('predict') }}" class="btn">Try Again</a>
+                    <a href="{{ url_for('home') }}" class="btn secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const heart = document.querySelector('.heart');
+        
+        // Adjust heart animation based on risk level
+        if (heart.classList.contains('high-risk')) {
+            heart.style.animationDuration = '0.8s';
+        } else {
+            heart.style.animationDuration = '1.5s';
+        }
+        
+        // Add particles for visual effect
+        function createParticles() {
+            const particles = 10;
+            const container = document.querySelector('.result-heart-container');
+            
+            for (let i = 0; i < particles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle ' + (heart.classList.contains('high-risk') ? 'high-risk' : 'low-risk');
+                container.appendChild(particle);
+                
+                // Random position around the heart
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 120 + Math.random() * 80;
+                
+                particle.style.left = `calc(50% + ${Math.cos(angle) * distance}px)`;
+                particle.style.top = `calc(50% + ${Math.sin(angle) * distance}px)`;
+                
+                // Random size and animation
+                const size = 3 + Math.random() * 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Animate particle
+                const animation = particle.animate([
+                    { transform: 'scale(0)', opacity: 0 },
+                    { transform: 'scale(1)', opacity: 0.7 },
+                    { transform: 'scale(0)', opacity: 0 }
+                ], {
+                    duration: 1000 + Math.random() * 2000,
+                    delay: Math.random() * 2000
+                });
+                
+                animation.onfinish = function() {
+                    particle.remove();
+                };
+            }
+            
+            // Schedule next particles
+            setTimeout(createParticles, 500);
+        }
+        
+        createParticles();
+    });
+</script>
+{% endblock %}

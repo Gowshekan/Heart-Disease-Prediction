@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardioScan AI - Heart Disease Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>CardioScan AI</span>
+            </div>
+            <div class="theme-toggle">
+                <button id="themeToggle" aria-label="Toggle theme" class="btn secondary">🌙</button>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}" {% if request.path == '/' %}class="active"{% endif %}>Home</a></li>
+                    <li><a href="{{ url_for('predict') }}" {% if request.path == '/predict' %}class="active"{% endif %}>Predict</a></li>
+                    <li><a href="{{ url_for('about') }}" {% if request.path == '/about' %}class="active"{% endif %}>About</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p>&copy; 2023 CardioScan AI. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% endblock %}
+</body>
+</html>

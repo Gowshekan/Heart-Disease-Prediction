@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h1>Predict Heart Disease with AI</h1>
+        <p>Our advanced machine learning model analyzes your health data to assess your heart disease risk with remarkable accuracy. Take control of your heart health today.</p>
+        <a href="{{ url_for('predict') }}" class="btn">Get Started</a>
+    </div>
+    <div class="heart-container">
+        <div class="heart-glow"></div>
+        <div class="heart">
+            <div class="heart-veins">
+                <div class="vein vein-1"></div>
+                <div class="vein vein-2"></div>
+                <div class="vein vein-3"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="ecg-monitor">
+    <div class="ecg-line"></div>
+    <div class="ecg-beat"></div>
+</div>
+
+<section class="features">
+    <h2 class="section-title">How It Works</h2>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Input Your Data</h3>
+            <p>Enter your health metrics like age, blood pressure, cholesterol levels, and other relevant information.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <h3>AI Analysis</h3>
+            <p>Our sophisticated neural network analyzes your data against thousands of cases to assess your risk.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-file-medical"></i>
+            </div>
+            <h3>Get Results</h3>
+            <p>Receive a detailed report with your heart disease risk assessment and recommendations for improvement.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
