@@ -1,6 +1,3 @@
-Here is a polished and well-organized README file for the **Heart Disease Prediction System**, complete with emojis and clear sections.
-
------
 
 # 💖 Heart Disease Prediction System
 
