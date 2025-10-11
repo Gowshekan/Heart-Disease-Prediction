@@ -26,7 +26,7 @@ A cutting-edge web application that leverages **deep learning** to predict heart
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/heart-disease-prediction.git
+    https://github.com/Gowshekan/Heart-Disease-Prediction.git
     cd heart-disease-prediction
     ```
 
